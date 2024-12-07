@@ -10,17 +10,19 @@ import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer
+import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
-@EnableWebSecurity
-@EnableMethodSecurity
 class SecurityConfig(
     private val customUserDetailsService: CustomUserDetailsService,
     private val unauthorizedHandler: JwtAuthenticationEntryPoint,
@@ -55,16 +57,16 @@ class SecurityConfig(
             }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/auth/test", "api/auth/refresh", "/error")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/user")
-                    .permitAll()
-                    .requestMatchers("/api/user**")
-                    .hasRole("ADMIN")
-                    .anyRequest()
-                    .fullyAuthenticated()
+                    .requestMatchers("/auth/**", "api/auth/refresh", "/error").permitAll()
+                    .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                    .requestMatchers("/api/user**").hasRole("ADMIN")
+                    .anyRequest().authenticated()
             }
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
+
+
 }
+

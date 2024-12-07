@@ -11,7 +11,6 @@ import org.springframework.data.annotation.LastModifiedBy
 abstract class UserDateAudit : DateAudit() {
     @CreatedBy
     var createdBy: Long? = null
-
     @LastModifiedBy
     var updatedBy: Long? = null
 }

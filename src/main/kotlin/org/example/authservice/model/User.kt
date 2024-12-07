@@ -42,5 +42,5 @@ class User(
         inverseJoinColumns = [JoinColumn(name = "role_id")]
     )
     val roles: MutableSet<Role> = mutableSetOf(),
-) : DateAudit()
+)
 

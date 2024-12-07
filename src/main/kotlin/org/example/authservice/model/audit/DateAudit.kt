@@ -8,17 +8,16 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.io.Serializable
+import java.time.LocalDateTime
 import java.util.*
 
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 @JsonIgnoreProperties(value = ["createdAt", "updatedAt"], allowGetters = true)
-@Getter
 abstract class DateAudit : Serializable {
     @CreatedDate
-    private val createdAt: Date? = null
-
+    val createdAt: LocalDateTime? = null
     @LastModifiedDate
-    private val updatedAt: Date? = null
+    val updatedAt: LocalDateTime? = null
 }

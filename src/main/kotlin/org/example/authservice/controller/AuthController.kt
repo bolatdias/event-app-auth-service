@@ -8,13 +8,10 @@ import org.example.authservice.dto.Token
 import org.example.authservice.dto.UserPayload
 import org.example.authservice.service.AuthService
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 class AuthController(
