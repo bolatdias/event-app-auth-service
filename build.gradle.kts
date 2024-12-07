@@ -31,12 +31,16 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("javax.validation:validation-api:2.0.0.Final")
+    implementation("io.jsonwebtoken:jjwt:0.12.6")
+    implementation ("io.springfox:springfox-boot-starter:3.0.0")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.oracle.database.jdbc:ojdbc11")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.security:spring-security-test")
+    runtimeOnly("com.mysql:mysql-connector-j")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
