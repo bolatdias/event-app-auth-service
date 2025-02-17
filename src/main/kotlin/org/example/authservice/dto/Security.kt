@@ -15,8 +15,6 @@ data class Token(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SignUpRequest(
-    @Size(min = 4, max = 40)
-    var name: @NotBlank String,
     @Size(min = 3, max = 15)
     var username: @NotBlank String,
     @Size(max = 40)
@@ -28,7 +26,7 @@ data class SignUpRequest(
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class LoginInRequest(
     @NotBlank
-    var username: String,
+    var usernameOrEmail: String,
     @NotBlank
     var password: String
 )

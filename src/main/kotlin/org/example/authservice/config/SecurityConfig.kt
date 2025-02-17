@@ -57,7 +57,7 @@ class SecurityConfig(
             }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/auth/**", "api/auth/refresh", "/error").permitAll()
+                    .requestMatchers("/auth-service/auth/**", "api/auth/refresh", "/error").permitAll()
                     .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
                     .requestMatchers("/api/user**").hasRole("ADMIN")

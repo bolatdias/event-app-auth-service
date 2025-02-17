@@ -6,6 +6,8 @@ import org.example.authservice.dto.LoginInRequest
 import org.example.authservice.dto.SignUpRequest
 import org.example.authservice.dto.Token
 import org.example.authservice.dto.UserPayload
+import org.example.authservice.security.CurrentUser
+import org.example.authservice.security.UserPrincipal
 import org.example.authservice.service.AuthService
 import org.example.authservice.service.UserService
 import org.springframework.stereotype.Controller
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth-service/auth")
 @RequiredArgsConstructor
 class AuthController(
     private val authService: AuthService,
@@ -29,7 +31,6 @@ class AuthController(
     fun loginIn(@RequestBody request: LoginInRequest): Token {
         return authService.authenticateUser(request)
     }
-
 
     @GetMapping("/check-username-availability")
     fun checkUsernameAvailability(username: String?): Boolean {

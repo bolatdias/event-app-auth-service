@@ -31,7 +31,7 @@ class AuthService(
     fun authenticateUser(request: LoginInRequest): Token {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                request.username,
+                request.usernameOrEmail,
                 request.password
             )
         )

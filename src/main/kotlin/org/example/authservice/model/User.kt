@@ -21,9 +21,6 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Size(max = 40) @NotBlank
-    val name: String,
-
     @Size(max = 15) @NotBlank
     val username: String,
 
