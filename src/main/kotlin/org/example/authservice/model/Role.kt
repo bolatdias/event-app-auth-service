@@ -18,6 +18,6 @@ class Role(
 
 enum class RoleName {
     ROLE_USER,
-    ROLE_ADMIN,
-    ROLE_COMPANY
+    ROLE_RESTAURANT_OWNER,
+    ROLE_SERVICE_VENDOR
 }

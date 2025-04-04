@@ -1,16 +1,16 @@
 package org.example.authservice.controller
 
 
+
+import jakarta.validation.Valid
 import lombok.RequiredArgsConstructor
 import org.example.authservice.dto.LoginInRequest
 import org.example.authservice.dto.SignUpRequest
 import org.example.authservice.dto.Token
 import org.example.authservice.dto.UserPayload
-import org.example.authservice.security.CurrentUser
-import org.example.authservice.security.UserPrincipal
 import org.example.authservice.service.AuthService
 import org.example.authservice.service.UserService
-import org.springframework.stereotype.Controller
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 
@@ -23,12 +23,12 @@ class AuthController(
 ) {
 
     @PostMapping("/sign-up")
-    fun signUp(@RequestBody request: SignUpRequest): UserPayload {
+    fun signUp(@RequestBody @Valid request: SignUpRequest): UserPayload {
         return authService.signUp(request)
     }
 
     @PostMapping("/login-in")
-    fun loginIn(@RequestBody request: LoginInRequest): Token {
+    fun loginIn(@RequestBody @Valid request: LoginInRequest): Token {
         return authService.authenticateUser(request)
     }
 
@@ -41,4 +41,5 @@ class AuthController(
     fun checkEmailAvailability(email: String?): Boolean {
         return userService.checkEmailAvailability(email)
     }
+
 }

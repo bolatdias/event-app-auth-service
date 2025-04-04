@@ -1,10 +1,13 @@
 package org.example.authservice.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Size
 import lombok.Getter
-import javax.validation.constraints.Email
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
+import org.example.authservice.model.RoleName
 
 
 @Getter
@@ -15,13 +18,23 @@ data class Token(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SignUpRequest(
-    @Size(min = 3, max = 15)
-    var username: @NotBlank String,
-    @Size(max = 40)
-    var email: @NotBlank @Email String,
-    @Size(min = 6, max = 20)
-    var password: @NotBlank String
+    @field:Size(min = 3, max = 15)
+    @field:NotBlank(message = "Username is required")
+    var username: String,
+
+    @field:Size(max = 40)
+    @field:NotBlank(message = "Email is required")
+    @field:Email(message = "Invalid email format")
+    var email: String,
+
+    @field:Size(min = 6, max = 20)
+    @field:NotBlank(message = "Password is required")
+    var password: String,
+
+    @Enumerated(EnumType.STRING)
+    var role: RoleName,
 )
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class LoginInRequest(

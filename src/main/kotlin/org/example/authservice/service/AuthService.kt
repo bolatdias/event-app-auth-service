@@ -44,7 +44,7 @@ class AuthService(
 
     fun signUp(request: SignUpRequest): UserPayload {
         val user = mapToUserModel(request)
-        insertUser(user, RoleName.ROLE_USER)
+        insertUser(user, request.role)
 
         return UserPayload(user, "success")
     }

@@ -1,26 +1,28 @@
 server:
   port: 8777
 
+
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-server  # Use service name instead of localhost
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://13.61.6.43:8761/eureka/  # Ensure the key is `defaultZone` (camelCase) and no trailing spaces
 
 
 spring:
   application:
     name: auth-service
   datasource:
-    url: "jdbc:mysql://localhost:3306/db?serverTimezone=UTC"
+    url: "jdbc:mysql://13.61.6.43:3306/db?serverTimezone=UTC"
     username: "user"
     password: "password"
     driver-class-name: "com.mysql.cj.jdbc.Driver"  # MySQL driver
 
-
+springdoc:
+  override-with-generic-response: false
 
   jpa:
     show-sql: true
@@ -35,6 +37,6 @@ spring:
 
 app:
   cors:
-    allowedOrigins: http://localhost:8080
+    allowedOrigins: http://localhost:9000, https://13.60.244.202
   jwtExpirationInMs: 604800000
   jwtSecret: 9a02115a835ee03d5fb83cd8a468ea33e4090aaaec87f53c9fa54512bbef4db8dc656c82a315fa0c785c08b0134716b81ddcd0153d2a7556f2e154912cf5675f
